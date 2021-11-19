@@ -9,7 +9,7 @@ class LocalSignupForm(forms.Form):
     def signup(self, request, user):
         g = Group.objects.get(pk=1)
         user.groups.add(g)
-        user.is_staff = True
+        user.is_staff = False
         user.save()
 
 class CommentForm(forms.ModelForm):
