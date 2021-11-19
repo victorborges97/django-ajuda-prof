@@ -1,0 +1,46 @@
+{% extends 'posts/layout.html' %}
+
+{% block content %}
+
+<div class="col-md">
+
+  {% if posts %}
+  {% for post in posts %}
+  <div class="col-md">
+    <div class="no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0">{{ post.post_title }}</h3>
+        <div class="mb-1 text-muted">{{ post.post_create|date:'d, M Y' }}</div>
+        <p class="card-text mb-auto text-justify text-truncate p-3">{{ post.post_content|safe|truncatewords:50 }}</p>
+        <a href="{% url 'posts:detail' post.id %}" class="md-2 badge badge-info">Ver postagem completa...</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>
+    No Posts are available.
+  </p>
+  {% endif %}
+  <!-- 
+  <ul class="pagination col row flex-nowrap justify-content-between align-items-center">
+    <li class="page-item disabled">
+      {% if posts.has_previous %}
+      <a class="page-link" href="?page={{ posts.previous_page_number }}">Anterior</a>
+      {% endif %}
+    </li>
+
+
+    <li class="page-item">
+      {% if posts.has_next %}
+      <a class="page-link" href="?page={{ posts.next_page_number }}">Próximo</a>
+      {% endif %}
+    </li>
+  </ul>-->
+</div>
+
+<!-- <nav class="blog-pagination">
+  <a class="btn btn-outline-primary" href="#">Older</a>
+  <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+</nav> -->
+{% endblock %}

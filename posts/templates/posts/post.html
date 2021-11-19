@@ -1,0 +1,49 @@
+{% extends 'posts/layout.html' %}
+
+{% block content %}
+
+<div class="blog-post">
+    <h2 class="blog-post-title">{{ post.post_title }}</h2>
+    <p class="blog-post-meta">{{ post.post_create|date:'d, M Y' }}</p>
+
+    <p class="text-justify">{{ post.post_content|safe }}</p>
+
+    <hr />
+    <br />
+    <div>
+        {% for comment in post.comment_set.all %}
+        <div class="media mb-3 ">
+            <img src="https://avatars.dicebear.com/api/adventurer/{{ comment.comment_author.author_name }}.svg"
+                alt="John Doe" class="mr-2 align-self-top rounded-circle" style="width:30px;">
+            <div class="media-body border p-1 rounded">
+                <h6>
+                    {{ comment.comment_author.author_name }}
+                    <small><i>Postado em </i></small>
+                    <small><i>{{ comment.comment_create|date:'d F, Y' }}</i></small>
+
+                </h6>
+
+                <p>{{ comment.comment_text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="media">
+            <img src="https://joeschmoe.io/api/v1/random" alt="John Doe" class="mr-2 align-self-center rounded-circle"
+                style="width:30px;">
+            <div class="media-body border p-1 rounded">
+                <div class="form-group">
+                    <label for="comment">Comentário:</label>
+                    <textarea class="form-control" id="comment"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm">Send</button>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="{% url 'posts:index' %}" class="badge badge-info">Voltar</a>
+
+</div>
+
+{% endblock %}

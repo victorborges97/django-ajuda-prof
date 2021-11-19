@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog | AjudarProf{% endblock title %}
+
+{%block content %}
+
+<div class="row">
+  <aside class="col-md-3 blog-sidebar">
+    <div class="p-4 mb-3 bg-light rounded">
+      <h4 class="font-italic">Sobre</h4>
+      <p class="mb-0">
+        Blog desenvolvido para apresentação na disciplina de Projeto, com intuido de ajudar aos professores, mostrando
+        ferramentas onde eles possam trabalhar.
+
+      </p>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="card">
+      <div class="card-body">
+        <div class="h5">@{{user.username}}</div>
+        {% if user.get_full_name != '' %}
+        <div class="h7 text-muted">Fullname : {{user.get_full_name}}</div>
+        {% endif %}
+
+        {% if user.username == 'borges'%}
+        <div class="h7">Developer of web applications, JavaScript, PHP, Kotlin, Flutter, Python, Node.js,
+          etc.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="p-4 mb-3 bg-light rounded">
+      <ul>
+
+        <li>{{ categoria.titulo }}</li>
+
+      </ul>
+
+    </div>
+
+    <div class="p-4">
+      <h4 class="font-italic">Redes Sociais</h4>
+      <ol class="list-unstyled">
+        <li><a href="https://github.com/victorborges97">GitHub</a></li>
+      </ol>
+    </div>
+  </aside>
+  <!-- /.blog-sidebar -->
+
+  <div class="col-md-8 blog-main">
+    <div class="col-md">
+
+
+
+      {% if posts %} {% for post in posts %}
+      <!-- <div class="col-md">
+        <div class="
+            no-gutters
+            border
+            rounded
+            overflow-hidden
+            flex-md-row
+            mb-4
+            shadow-sm
+            h-md-250
+            position-relative
+          ">
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{ post.post_title }}</h3>
+            <div class="mb-1 text-muted">
+              {{ post.post_create|date:'d, M Y' }}
+            </div>
+            <p class="card-text mb-auto text-justify text-truncate p-3">
+              {{ post.post_content|safe|truncatewords:50 }}
+            </p>
+            <a href="{% url 'posts:post_detail' post.id %}" class="md-2 badge badge-info">Ver postagem completa...</a>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="card gedf-card mb-4">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="mr-2">
+                <img class="rounded-circle" width="45" height="45"
+                  src="https://avatars.dicebear.com/api/adventurer/{{ post.post_author.username }}.svg" alt="" />
+              </div>
+              <div class="ml-2">
+                <div class="h5 m-0">@{{ post.post_author.username }}</div>
+                <div class="h7 text-muted">{{ post.post_author.first_name }}</div>
+              </div>
+            </div>
+            <!-- <div>
+              <div class="dropdown">
+                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                  <div class="h6 dropdown-header">Configuration</div>
+                  <a class="dropdown-item" href="#">Save</a>
+                  <a class="dropdown-item" href="#">Hide</a>
+                  <a class="dropdown-item" href="#">Report</a>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+        </div>
+        <div class="card-body">
+          <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ post.post_create|date:'d, M Y' }}</div>
+          <a class="card-link" href="{% url 'posts:post_detail' post.id %}">
+            <h5 class="card-title">{{ post.post_title }}</h5>
+          </a>
+
+          <p class="card-text">
+            {{ post.post_content|safe|truncatewords:50 }}
+          </p>
+          <!-- <div>
+            <span class="badge badge-primary">JavaScript</span>
+            <span class="badge badge-primary">Android</span>
+            <span class="badge badge-primary">PHP</span>
+            <span class="badge badge-primary">Node.js</span>
+            <span class="badge badge-primary">Ruby</span>
+            <span class="badge badge-primary">Paython</span>
+          </div> -->
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'posts:post_detail' post.id %}" class="card-link"><i class="fa fa-share-square-o"></i>
+            Abrir</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'posts:post_detail' post.id %}" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
+          {% endif %}
+          <!-- <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
+        </div>
+      </div>
+
+      {% endfor %}
+      {% else %}
+      <p>No Posts are available.</p>
+      {% endif %}
+
+
+
+
+      <!-- 
+    <ul class="pagination col row flex-nowrap justify-content-between align-items-center">
+      <li class="page-item disabled">
+        {% if posts.has_previous %}
+        <a class="page-link" href="?page={{ posts.previous_page_number }}">Anterior</a>
+        {% endif %}
+      </li>
+
+
+      <li class="page-item">
+        {% if posts.has_next %}
+        <a class="page-link" href="?page={{ posts.next_page_number }}">Próximo</a>
+        {% endif %}
+      </li>
+    </ul>-->
+    </div>
+  </div>
+  <!-- /.blog-main -->
+</div>
+<!-- /.row -->
+
+{% endblock content %}

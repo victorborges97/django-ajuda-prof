@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Entrar{%endblock%}
+
+{% block content %}
+
+<h2>Entrar</h2>
+<form method="POST">
+    {%csrf_token%}
+    {{ form|crispy }}
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-success">Entrar</button>
+        <a class="btn btn-info" href="{% url 'account_signup' %}">Cadastre-se</a>
+    </div>
+</form>
+
+{% endblock %}
