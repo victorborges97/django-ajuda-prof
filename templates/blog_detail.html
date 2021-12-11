@@ -81,7 +81,7 @@
 
         {% for comment in post.comment_set.all %}
         <div id="comentarios" class="media mb-3">
-          <img src="https://avatars.dicebear.com/api/adventurer/{{ comment.comment_author.author_name }}.svg"
+          <img src="https://avatars.dicebear.com/api/adventurer/{{ comment.comment_author.username }}.svg"
             alt="John Doe" class="mr-2 align-self-top bg-secondary rounded" width="45" />
           <div class="media-body border p-1 rounded">
             <h6>
@@ -102,7 +102,6 @@
                 <textarea class="form-control counted" name="comment_text" placeholder="Digite uma mensagem" rows="5"
                   style="margin-bottom:10px;">
                 </textarea>
-                <h6 class="pull-right" id="counter">320 characters remaining</h6>
                 <button class="btn btn-info" type="submit">Comentar</button>
               </form>
             </div>
